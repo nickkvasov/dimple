@@ -29,6 +29,33 @@
             return returnCy;
         },
 
+        // Calculate the centre x position
+        rectx: function (d, chart, series) {
+            var returnRectx = 0;
+            if (series.x.measure !== null && series.x.measure !== undefined) {
+                returnRectx = series.x._scale(d.rectx);
+            } else if (series.x._hasCategories() && series.x.categoryFields.length >= 2) {
+                returnRectx = series.x._scale(d.rectx) + dimple._helpers.xGap(chart, series) + ((d.xOffset + 0.5) * (((chart._widthPixels() / series.x._max) - 2 * dimple._helpers.xGap(chart, series)) * d.width));
+            } else {
+                returnRectx = series.x._scale(d.rectx) + ((chart._widthPixels() / series.x._max) / 2);
+            }
+            return returnRectx;
+        },
+
+        // Calculate the centre y position
+        recty: function (d, chart, series) {
+            var returnCy = 0;
+            if (series.y.measure !== null && series.y.measure !== undefined) {
+                returnCy = series.y._scale(d.cy);
+            } else if (series.y.categoryFields !== null && series.y.categoryFields !== undefined && series.y.categoryFields.length >= 2) {
+                returnCy = (series.y._scale(d.cy) - (chart._heightPixels() / series.y._max)) +  dimple._helpers.yGap(chart, series) + ((d.yOffset + 0.5) * (((chart._heightPixels() / series.y._max) - 2 * dimple._helpers.yGap(chart, series)) * d.height));
+            } else {
+                returnCy = series.y._scale(d.cy) - ((chart._heightPixels() / series.y._max) / 2);
+            }
+            return returnCy;
+        },
+
+
         // Calculate the radius
         r: function (d, chart, series) {
             var returnR = 0,
@@ -176,4 +203,3 @@
 
 
     };
-
