@@ -39,20 +39,24 @@
             } else {
                 returnRectx = series.x._scale(d.rectx) + ((chart._widthPixels() / series.x._max) / 2);
             }
+
+            // returnRectx = 10;
             return returnRectx;
         },
 
         // Calculate the centre y position
         recty: function (d, chart, series) {
-            var returnCy = 0;
+            var returnRecty = 0;
             if (series.y.measure !== null && series.y.measure !== undefined) {
-                returnCy = series.y._scale(d.cy);
+                returnRecty = series.y._scale(d.recty);
             } else if (series.y.categoryFields !== null && series.y.categoryFields !== undefined && series.y.categoryFields.length >= 2) {
-                returnCy = (series.y._scale(d.cy) - (chart._heightPixels() / series.y._max)) +  dimple._helpers.yGap(chart, series) + ((d.yOffset + 0.5) * (((chart._heightPixels() / series.y._max) - 2 * dimple._helpers.yGap(chart, series)) * d.height));
+                returnRecty = (series.y._scale(d.recty) - (chart._heightPixels() / series.y._max)) +  dimple._helpers.yGap(chart, series) + ((d.yOffset + 0.5) * (((chart._heightPixels() / series.y._max) - 2 * dimple._helpers.yGap(chart, series)) * d.height));
             } else {
-                returnCy = series.y._scale(d.cy) - ((chart._heightPixels() / series.y._max) / 2);
+                returnRecty = series.y._scale(d.recty) - ((chart._heightPixels() / series.y._max) / 2);
             }
-            return returnCy;
+
+            //returnRecty = 10;
+            return returnRecty;
         },
 
 
